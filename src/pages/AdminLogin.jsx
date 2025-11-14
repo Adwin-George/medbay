@@ -9,15 +9,16 @@ const AdminLogin = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // ✅ Accepts either plain "admin" or email-style "admin@finddoc.com"
-    const isEmail =
-      (email === "admin@finddoc.com" || email === "admin" || email === "Admin");
+    // ✅ MedBay admin credentials
+    const validEmail =
+      email.toLowerCase() === "admin" ||
+      email.toLowerCase() === "admin@medbay.com";
 
-    const isPassword = password === "finddoc123";
+    const validPassword = password === "medbay123";
 
-    if (isEmail && isPassword) {
+    if (validEmail && validPassword) {
       localStorage.setItem("isAdmin", "true");
-      alert("✅ Welcome Admin!");
+      alert("✅ Welcome, MedBay Admin!");
       navigate("/dashboard");
     } else {
       alert("❌ Invalid credentials");
@@ -28,8 +29,9 @@ const AdminLogin = () => {
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 px-4">
       <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-sm">
         <h1 className="text-3xl font-bold text-blue-700 text-center mb-6">
-          🩺 Admin Login
+          🩺 MedBay Admin Login
         </h1>
+
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block text-sm text-gray-600 mb-1">
@@ -37,7 +39,7 @@ const AdminLogin = () => {
             </label>
             <input
               type="text"
-              placeholder="admin or admin@finddoc.com"
+              placeholder="admin or admin@medbay.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full border rounded-lg p-2 focus:ring focus:ring-blue-300"
@@ -46,7 +48,9 @@ const AdminLogin = () => {
           </div>
 
           <div>
-            <label className="block text-sm text-gray-600 mb-1">Password</label>
+            <label className="block text-sm text-gray-600 mb-1">
+              Password
+            </label>
             <input
               type="password"
               placeholder="Enter password"
@@ -66,8 +70,11 @@ const AdminLogin = () => {
         </form>
 
         <p className="text-gray-500 text-xs text-center mt-4">
-          Default credentials: <br />
-          <strong>admin / finddoc123</strong> or <strong>admin@finddoc.com / finddoc123</strong>
+          Default credentials:
+          <br />
+          <strong>admin / medbay123</strong>
+          <br />
+          <strong>admin@medbay.com / medbay123</strong>
         </p>
       </div>
     </div>
